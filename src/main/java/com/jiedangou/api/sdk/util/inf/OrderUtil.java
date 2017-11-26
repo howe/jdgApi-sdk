@@ -97,7 +97,7 @@ public class OrderUtil {
                 req.setVersion(Dict.JDG_API_VERSION);
                 req.setBizData(Lang.obj2nutmap(order));
                 req.setSign(Lang.md5(JdgUtil.buildParmas(Lang.obj2nutmap(req), new String[]{"sign"}) + key));
-                String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_GAME_QUERYGAMELIST, Json.toJson(req));
+                String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER, Json.toJson(req));
                 if (Strings.isEmpty(json)) {
                     log.error("返回值异常");
                     return null;
@@ -183,7 +183,7 @@ public class OrderUtil {
                 req.setVersion(Dict.JDG_API_VERSION);
                 req.setBizData(Lang.obj2nutmap(order));
                 req.setSign(Lang.md5(JdgUtil.buildParmas(Lang.obj2nutmap(req), new String[]{"sign"}) + key));
-                String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_GAME_QUERYGAMELIST, Json.toJson(req));
+                String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER_V1, Json.toJson(req));
                 if (Strings.isEmpty(json)) {
                     log.error("返回值异常");
                     return null;
