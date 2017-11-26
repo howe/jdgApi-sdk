@@ -148,14 +148,13 @@ public class Order {
     /**
      * 订单要求完成时间
      */
-    @JsonField(dataFormat = Dict.DATE_FORMART_FULL)
-    private Date requiredCompleteTime;
+    private String requiredCompleteTime;
 
-    public Date getRequiredCompleteTime() {
+    public String getRequiredCompleteTime() {
         return requiredCompleteTime;
     }
 
-    public void setRequiredCompleteTime(Date requiredCompleteTime) {
+    public void setRequiredCompleteTime(String requiredCompleteTime) {
         this.requiredCompleteTime = requiredCompleteTime;
     }
 
