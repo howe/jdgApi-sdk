@@ -143,7 +143,7 @@ public class HttpUtil {
      * @param json
      * @return
      */
-    public static String post(String url, Json json) {
+    public static String post(String url, String json) {
 
         if (Strings.isBlank(url)) {
             log.error("url为空");
@@ -157,7 +157,7 @@ public class HttpUtil {
         } else {
             Request req = Request.create(url, Request.METHOD.POST);
             req.getHeader().set("Content-Type", "application/json;charset=UTF-8");
-            req.setData(json.toString());
+            req.setData(json);
             Response resp = Sender.create(req).setTimeout(6000).send();
             return resp.getContent();
         }
@@ -170,7 +170,7 @@ public class HttpUtil {
      * @param xml
      * @return
      */
-    public static String post(String url, String xml) {
+    public static String postXml(String url, String xml) {
 
         if (Strings.isBlank(url)) {
             log.error("url为空");
@@ -184,6 +184,5 @@ public class HttpUtil {
         } else {
             return Http.postXML(url, xml, 10000).getContent();
         }
-
     }
 }
