@@ -6,7 +6,6 @@ import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
-import org.apache.commons.codec.binary.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -14,9 +13,6 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static org.apache.commons.codec.binary.Base64.decodeBase64;
-import static org.apache.commons.codec.binary.Base64.encodeBase64String;
 
 /**
  * Created on 2017/11/25
@@ -37,6 +33,7 @@ public class JdgUtil {
     public static Map<String, Object> sorting(Map<String, Object> params, String order) {
 
         if (Lang.isEmpty(params)) {
+            log.error("params参数为空");
             return null;
         } else {
             Map<String, Object> map = new LinkedHashMap<>();
@@ -63,6 +60,9 @@ public class JdgUtil {
     public static String buildParmas(Map<String, Object> params, String[] f) {
 
         if (Lang.isEmpty(f)) {
+            log.error("params参数为空");
+            return "";
+        } else if (Lang.isEmpty(f)) {
             return buildParmas(params);
         } else {
             Arrays.asList(f).stream().forEach(params::remove);
@@ -79,6 +79,7 @@ public class JdgUtil {
     public static String buildParmas(Map<String, Object> params) {
 
         if (Lang.isEmpty(params)) {
+            log.error("params参数为空");
             return null;
         } else {
             params = sorting(params, "asc");
@@ -106,6 +107,7 @@ public class JdgUtil {
         public static String encode(String s) {
 
             if (Strings.isBlank(s)) {
+                log.error("s加密对象为空");
                 return "";
             } else {
                 try {
@@ -126,6 +128,7 @@ public class JdgUtil {
         public static String decode(String s) {
 
             if (Strings.isBlank(s)) {
+                log.error("s加密对象为空");
                 return "";
             } else {
                 try {
@@ -152,9 +155,10 @@ public class JdgUtil {
         public static String encode(String s) {
 
             if (Strings.isBlank(s)) {
+                log.error("s加密对象为空");
                 return "";
             } else {
-                return encodeBase64String(s.getBytes(Encoding.CHARSET_UTF8));
+                return org.nutz.repo.Base64.encodeToString(s.getBytes(Encoding.CHARSET_UTF8), true);
             }
         }
 
@@ -166,9 +170,10 @@ public class JdgUtil {
          */
         public static String decode(String s) {
             if (Strings.isBlank(s)) {
+                log.error("s解密对象为空");
                 return "";
             } else {
-                return StringUtils.newStringUtf8(decodeBase64(s));
+                return new String(org.nutz.repo.Base64.decode(s));
             }
         }
     }
@@ -184,7 +189,11 @@ public class JdgUtil {
 
         String sign = params.getString("sign");
         System.out.println(Lang.md5(Url.encode(buildParmas(params, new String[]{"sign"})) + key));
-        if (Lang.isEmpty(params) || Strings.isBlank(key)) {
+        if (Lang.isEmpty(params)) {
+            log.error("params参数为空");
+            return false;
+        } else if (Strings.isBlank(key)) {
+            log.error("key密钥为空");
             return false;
         } else {
             if (Strings.equalsIgnoreCase(Lang.md5(Url.encode(buildParmas(params, new String[]{"sign"})) + key), sign)) {
@@ -204,10 +213,10 @@ public class JdgUtil {
      */
     public static String buildSign(NutMap obj, String key) {
         if (Lang.isEmpty(obj)) {
-            log.error("加密对象为空");
+            log.error("obj加密对象为空");
             return null;
         } else if (Strings.isEmpty(key)) {
-            log.error("密钥key为空");
+            log.error("key密钥为空");
             return null;
         } else {
             return Lang.md5(buildParmas(obj, new String[]{"sign"}) + key);
