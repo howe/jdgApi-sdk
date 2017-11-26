@@ -65,7 +65,7 @@ public class GameUtil {
      * @param key       密钥key
      * @return
      */
-    public static Game queryGameDetail(Integer partnerId, String key, Integer gameId) {
+    public static Game queryGame(Integer partnerId, String key, Integer gameId) {
 
         if (Lang.isEmpty(partnerId)) {
             log.error("url为空");

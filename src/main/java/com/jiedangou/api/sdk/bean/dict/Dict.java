@@ -11,5 +11,5 @@ public class Dict {
     public static String JDG_API_HOST = "https://api.jiedangou.com";
     public static String JDG_API_VERSION = "1.0";
     public static String JDG_API_ACTION_GAME_QUERYGAMELIST = "/game/queryGameList.htm";
-    public static String JDG_API_ACTION_GAME_QUERYGAMEDETAIL = "/game/queryGameDetail.htm";
+    public static String JDG_API_ACTION_GAME_QUERYGAMEDETAIL = "/game/queryGame.htm";
 }
