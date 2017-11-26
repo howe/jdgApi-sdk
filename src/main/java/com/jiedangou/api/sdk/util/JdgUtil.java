@@ -1,5 +1,7 @@
 package com.jiedangou.api.sdk.util;
 
+import com.jiedangou.api.sdk.bean.param.pro.Account;
+import com.jiedangou.api.sdk.bean.param.pro.Contact;
 import org.nutz.lang.Encoding;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
@@ -221,5 +223,80 @@ public class JdgUtil {
         } else {
             return Lang.md5(buildParmas(obj, new String[]{"sign"}) + key);
         }
+    }
+
+    /**
+     * 判断数字是否存在数组
+     *
+     * @param array
+     * @param val
+     * @return
+     */
+    public static Boolean checkArrayExists(Integer[] array, Integer val) {
+
+        if (Lang.isEmpty(array)) {
+            log.error("array为空");
+            return false;
+        } else if (Lang.isEmpty(val)) {
+            log.error("val为空");
+            return false;
+        } else {
+            for (int a : Arrays.asList(array)) {
+                if (Lang.equals(a, val)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    /**
+     * 验证用户游戏账号
+     *
+     * @param account 用户游戏账号
+     * @return
+     */
+    public static Boolean checkAccount(Account account) {
+
+        if (Strings.isEmpty(account.getCsrAccount())) {
+            log.error("account.csrAccount客户游戏账号为空");
+            return false;
+        }
+        if (Strings.isEmpty(account.getCsrPassword())) {
+            log.error("account.csrPassword客户游戏密码为空");
+            return false;
+        }
+        if (Strings.isEmpty(account.getCsrRole())) {
+            log.error("account.csrRole客户游戏角色为空");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 验参客户联系方式
+     *
+     * @param contact 客户联系方式
+     * @return
+     */
+    public static Boolean checkContact(Contact contact) {
+
+        if (Strings.isEmpty(contact.getCtPhone())) {
+            log.error("contact.ctPhone联系电话为空");
+            return false;
+        }
+        if (!Strings.isMobile(contact.getCtPhone())) {
+            log.error("contact.ctPhone联系电话格式错误");
+            return false;
+        }
+        if (!Strings.isQQ(contact.getCtQQ())) {
+            log.error("contact.ctQQ联系QQ格式错误");
+            return false;
+        }
+        if (!Strings.isEmail(contact.getCtEmail())) {
+            log.error("contact.ctEmail联系邮箱格式错误");
+            return false;
+        }
+        return true;
     }
 }

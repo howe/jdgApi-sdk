@@ -26,7 +26,7 @@ public class GameUtil {
     protected static final Log log = Logs.get();
 
     /**
-     * 获取游戏列表
+     * 4.1 获取游戏列表
      *
      * @param partnerId 合作商ID
      * @param key       密钥key
@@ -59,7 +59,7 @@ public class GameUtil {
     }
 
     /**
-     * 获取游戏区服详情
+     * 4.2 获取游戏区服详情
      *
      * @param partnerId 合作商ID
      * @param key       密钥key
