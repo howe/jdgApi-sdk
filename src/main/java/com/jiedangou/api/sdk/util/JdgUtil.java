@@ -299,4 +299,29 @@ public class JdgUtil {
         }
         return true;
     }
+
+    /**
+     * 账号加密
+     *
+     * @param account
+     * @return
+     */
+    public static Account accountEncryption(Account account) {
+
+        account.setCsrPassword(Base64.encode(account.getCsrPassword()));
+        account.setCsrRole(Url.encode(account.getCsrRole()));
+        return account;
+    }
+
+    /**
+     * 账号解密
+     *
+     * @param account
+     * @return
+     */
+    public static Account accountDecryption(Account account) {
+        account.setCsrPassword(Base64.decode(account.getCsrPassword()));
+        account.setCsrRole(Url.decode(account.getCsrRole()));
+        return account;
+    }
 }
