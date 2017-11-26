@@ -145,7 +145,7 @@ public class OrderUtil {
             } else if (Lang.isEmpty(order.getOrderType())) {
                 log.error("order.orderType为空");
                 return null;
-            } else if (JdgUtil.checkArrayExists(Dict.ORDERTYPE_ARRAY, order.getOrderType())) {
+            } else if (!JdgUtil.checkArrayExists(Dict.ORDERTYPE_ARRAY, order.getOrderType())) {
                 log.error("order.orderType订单类型错误");
                 return null;
             } else if (Lang.isEmpty(order.getOrderAmount())) {

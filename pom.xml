@@ -7,8 +7,8 @@
     <artifactId>jdgApi-sdk</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Aliyun Maven Webapp</name>
-    <url>http://maven.aliyun.com</url>
+    <name>Nutz Maven Webapp</name>
+    <url>http://maven.nutz.cn</url>
 
     <dependencies>
         <dependency>
