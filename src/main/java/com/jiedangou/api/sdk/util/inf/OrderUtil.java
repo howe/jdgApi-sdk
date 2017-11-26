@@ -86,9 +86,9 @@ public class OrderUtil {
             } else if (Lang.isEmpty(order.getContact())) {
                 log.error("order.contact为空");
                 return null;
-            } else if (JdgUtil.checkAccount(order.getAccount())) {
+            } else if (!JdgUtil.checkAccount(order.getAccount())) {
                 return null;
-            } else if (JdgUtil.checkContact(order.getContact())) {
+            } else if (!JdgUtil.checkContact(order.getContact())) {
                 return null;
             } else {
                 BaseReq req = new BaseReq();
@@ -172,9 +172,9 @@ public class OrderUtil {
             } else if (Lang.isEmpty(order.getContact())) {
                 log.error("order.contact为空");
                 return null;
-            } else if (JdgUtil.checkAccount(order.getAccount())) {
+            } else if (!JdgUtil.checkAccount(order.getAccount())) {
                 return null;
-            } else if (JdgUtil.checkContact(order.getContact())) {
+            } else if (!JdgUtil.checkContact(order.getContact())) {
                 return null;
             } else {
                 BaseReq req = new BaseReq();
