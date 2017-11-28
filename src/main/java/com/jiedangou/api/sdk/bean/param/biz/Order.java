@@ -147,14 +147,15 @@ public class Order {
 
     /**
      * 订单要求完成时间
+     * 单位 小时
      */
-    private String requiredCompleteTime;
+    private Integer requiredCompleteTime;
 
-    public String getRequiredCompleteTime() {
+    public Integer getRequiredCompleteTime() {
         return requiredCompleteTime;
     }
 
-    public void setRequiredCompleteTime(String requiredCompleteTime) {
+    public void setRequiredCompleteTime(Integer requiredCompleteTime) {
         this.requiredCompleteTime = requiredCompleteTime;
     }
 
