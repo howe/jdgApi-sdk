@@ -1,6 +1,7 @@
 package com.jiedangou.api.sdk.util.inf;
 
 import com.jiedangou.api.sdk.bean.dict.Dict;
+import com.jiedangou.api.sdk.bean.param.biz.ModifyOrder;
 import com.jiedangou.api.sdk.bean.param.biz.Order;
 import com.jiedangou.api.sdk.bean.param.biz.OrderV1;
 import com.jiedangou.api.sdk.bean.param.req.BaseReq;
@@ -61,6 +62,9 @@ public class OrderUtil {
                 return null;
             } else if (!JdgUtil.checkArrayExists(Dict.ORDERTYPE_ARRAY, order.getOrderType())) {
                 log.error("order.orderType订单类型错误");
+                return null;
+            } else if (Lang.equals(order.getOrderType(), Dict.ORDERTYPE_PRIVATE) && Lang.isEmpty(order.getProviderId())) {
+                log.error("order.providerId服务商ID为空");
                 return null;
             } else if (Lang.isEmpty(order.getOrderAmount())) {
                 log.error("order.orderAmount为空");
@@ -163,6 +167,9 @@ public class OrderUtil {
             } else if (!JdgUtil.checkArrayExists(Dict.PLTYPE_ARRAY, order.getPlType())) {
                 log.error("order.plType代练类型错误");
                 return null;
+            } else if (Lang.equals(order.getOrderType(), Dict.ORDERTYPE_PRIVATE) && Lang.isEmpty(order.getProviderId())) {
+                log.error("order.providerId服务商ID为空");
+                return null;
             } else if (Strings.isBlank(order.getPlRequired())) {
                 log.error("order.plRequired为空");
                 return null;
@@ -194,5 +201,23 @@ public class OrderUtil {
                 }
             }
         }
+    }
+
+
+    /**
+     * 4.5 修改订单
+     *
+     * @param partnerId 合作商ID
+     * @param key       密钥key
+     * @param order     订单信息
+     * @return
+     */
+    public static Boolean modifyOrder(Integer partnerId, String key, ModifyOrder order) {
+
+        if (Lang.isEmpty(order.getOrderNum())) {
+            log.error("modifyOrder.orderNum接单狗订单号为空");
+            return false;
+        }
+        return null;
     }
 }

@@ -1,12 +1,8 @@
 package com.jiedangou.api.sdk.bean.param.biz;
 
-import com.jiedangou.api.sdk.bean.dict.Dict;
 import com.jiedangou.api.sdk.bean.param.pro.Account;
 import com.jiedangou.api.sdk.bean.param.pro.Contact;
-import org.nutz.json.JsonField;
 import org.nutz.lang.Lang;
-
-import java.util.Date;
 
 /**
  * 订单
@@ -98,6 +94,19 @@ public class Order {
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    /**
+     * 服务商ID
+     */
+    private Integer providerId;
+
+    public Integer getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(Integer providerId) {
+        this.providerId = providerId;
     }
 
     /**
