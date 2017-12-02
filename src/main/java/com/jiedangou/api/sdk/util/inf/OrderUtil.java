@@ -19,7 +19,7 @@ import org.nutz.log.Logs;
  * 订单
  * Created on 2017/11/26
  *
- * @author Jianghao(howechiang@gmail.com)
+ * @author Jianghao(howechiang @ gmail.com)
  */
 public class OrderUtil {
 
@@ -212,10 +212,72 @@ public class OrderUtil {
      * @param order     订单信息
      * @return
      */
-    public static Boolean modifyOrder(Integer partnerId, String key, ModifyOrder order) {
+    public static Boolean order(Integer partnerId, String key, ModifyOrder order) {
 
         if (Lang.isEmpty(order.getOrderNum())) {
-            log.error("modifyOrder.orderNum接单狗订单号为空");
+            log.error("order.orderNum接单狗订单号为空");
+            return false;
+        }
+
+        if (Lang.isEmpty(order.getOrderNum())) {
+            log.error("order.orderNum接单狗订单号为空");
+            return false;
+        }
+
+        if (Lang.isEmpty(order.getOperationType())) {
+            log.error("操作类型为空");
+            return false;
+        }
+
+        if (JdgUtil.checkArrayExists(Dict.OPERATIONTYPE_ARRAY, order.getOperationType())) {
+            log.error("操作类型错误");
+            return false;
+        }
+
+        if ((Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
+                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_ABNORMAL_EXCEPTION)
+                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_ARBITRATION))
+                && Strings.isBlank(order.getReason())) {
+            log.error("备注理由为空");
+            return false;
+        }
+
+        if ((Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_COMPLETE_ACCEPTANCE)
+                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
+                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_AGREE_WITHDRAW)
+                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_FILLING_MONEY))
+                && Strings.isBlank(order.getPayPassword())) {
+            log.error("支付密码为空");
+            return false;
+        }
+
+        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_FILLING_MONEY)
+                && Lang.isEmpty(order.getAddMoney())) {
+            log.error("加款钱数为空");
+            return false;
+        }
+
+        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_STOPPAGE_TIME)
+                && Lang.isEmpty(order.getAddTime())) {
+            log.error("加时时长为空");
+            return false;
+        }
+
+        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_CORRECT_PASSWORD)
+                && Strings.isBlank(order.getNewPassword())) {
+            log.error("修正密码为空");
+            return false;
+        }
+
+        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
+                && Lang.isEmpty(order.getPayAmount())) {
+            log.error("需支付金额为空");
+            return false;
+        }
+
+        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
+                && Lang.isEmpty(order.getOffset())) {
+            log.error("需赔付金额为空");
             return false;
         }
         return null;

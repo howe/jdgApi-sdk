@@ -324,4 +324,29 @@ public class JdgUtil {
         account.setCsrRole(Url.decode(account.getCsrRole()));
         return account;
     }
+
+    /**
+     * 判断字符串是否存在数组
+     *
+     * @param array
+     * @param val
+     * @return
+     */
+    public static Boolean checkArrayExists(String[] array, String val) {
+
+        if (Lang.isEmpty(array)) {
+            log.error("array为空");
+            return false;
+        } else if (Strings.isEmpty(val)) {
+            log.error("val为空");
+            return false;
+        } else {
+            for (String a : Arrays.asList(array)) {
+                if (Strings.equalsIgnoreCase(a, val)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
