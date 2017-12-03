@@ -35,7 +35,7 @@ public class GameUtil {
     public static List<Game> queryGameList(Integer partnerId, String key) {
 
         if (Lang.isEmpty(partnerId)) {
-            log.error("url为空");
+            log.error("合作商ID为空");
             return null;
         } else if (Strings.isBlank(key)) {
             log.error("key为空");
@@ -68,7 +68,7 @@ public class GameUtil {
     public static Game queryGame(Integer partnerId, String key, Integer gameId) {
 
         if (Lang.isEmpty(partnerId)) {
-            log.error("url为空");
+            log.error("合作商ID为空");
             return null;
         } else if (Strings.isBlank(key)) {
             log.error("key为空");
