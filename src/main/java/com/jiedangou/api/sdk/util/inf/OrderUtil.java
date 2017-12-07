@@ -12,8 +12,6 @@ import org.nutz.json.Json;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.nutz.lang.Times;
-import org.nutz.log.Log;
-import org.nutz.log.Logs;
 
 /**
  * 订单
@@ -22,8 +20,6 @@ import org.nutz.log.Logs;
  * @author Jianghao(howechiang @ gmail.com)
  */
 public class OrderUtil {
-
-    protected static final Log log = Logs.get();
 
     /**
      * 4.3 发布订单
@@ -35,82 +31,67 @@ public class OrderUtil {
      */
     public static String createOrder(Integer partnerId, String key, Order order) {
 
-        if (Lang.isEmpty(partnerId)) {
-            log.error("url为空");
-            return null;
-        } else if (Strings.isBlank(key)) {
-            log.error("key为空");
-            return null;
-        } else {
-            if (Strings.isEmpty(order.getOutOrderNum())) {
-                log.error("order.outOrderNum为空");
-                return null;
-            } else if (Lang.isEmpty(order.getGameId())) {
-                log.error("order.gameId为空");
-                return null;
-            } else if (Lang.isEmpty(order.getChannelId())) {
-                log.error("order.channelId为空");
-                return null;
-            } else if (Lang.isEmpty(order.getServerId())) {
-                log.error("order.serverId为空");
-                return null;
-            } else if (Strings.isBlank(order.getOrderTitle())) {
-                log.error("order.orderTitle为空");
-                return null;
-            } else if (Lang.isEmpty(order.getOrderType())) {
-                log.error("order.orderType为空");
-                return null;
-            } else if (!JdgUtil.checkArrayExists(Dict.ORDERTYPE_ARRAY, order.getOrderType())) {
-                log.error("order.orderType订单类型错误");
-                return null;
-            } else if (Lang.equals(order.getOrderType(), Dict.ORDERTYPE_PRIVATE) && Lang.isEmpty(order.getProviderId())) {
-                log.error("order.providerId服务商ID为空");
-                return null;
-            } else if (Lang.isEmpty(order.getOrderAmount())) {
-                log.error("order.orderAmount为空");
-                return null;
-            } else if (Lang.isEmpty(order.getEfficiencyMargin())) {
-                log.error("order.efficiencyMargin为空");
-                return null;
-            } else if (Lang.isEmpty(order.getSafetyMargin())) {
-                log.error("order.safetyMargin为空");
-                return null;
-            } else if (Lang.isEmpty(order.getRequiredCompleteTime())) {
-                log.error("order.requiredCompleteTime为空");
-                return null;
-            } else if (!JdgUtil.checkArrayExists(Dict.PLTYPE_ARRAY, order.getPlType())) {
-                log.error("order.plType代练类型错误");
-                return null;
-            } else if (Strings.isBlank(order.getPlRequired())) {
-                log.error("order.plRequired为空");
-                return null;
-            } else if (Lang.isEmpty(order.getAccount())) {
-                log.error("order.gaccount为空");
-                return null;
-            } else if (Lang.isEmpty(order.getContact())) {
-                log.error("order.contact为空");
-                return null;
-            } else if (!JdgUtil.checkAccount(order.getAccount())) {
-                return null;
-            } else if (!JdgUtil.checkContact(order.getContact())) {
-                return null;
+        try {
+            if (Lang.isEmpty(partnerId)) {
+                throw new Exception("url为空");
+            } else if (Strings.isBlank(key)) {
+                throw new Exception("key为空");
             } else {
-                BaseReq req = new BaseReq();
-                req.setPartnerId(partnerId);
-                req.setTimestamp(Times.getTS());
-                req.setVersion(Dict.JDG_API_VERSION);
-                req.setBizData(Lang.obj2nutmap(order));
-                req.setSign(Lang.md5(JdgUtil.buildParmas(Lang.obj2nutmap(req), new String[]{"sign"}) + key));
-                String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER, Json.toJson(req));
-                if (Strings.isEmpty(json)) {
-                    log.error("返回值异常");
-                    return null;
+                if (Strings.isEmpty(order.getOutOrderNum())) {
+                    throw new Exception("order.outOrderNum为空");
+                } else if (Lang.isEmpty(order.getGameId())) {
+                    throw new Exception("order.gameId为空");
+                } else if (Lang.isEmpty(order.getChannelId())) {
+                    throw new Exception("order.channelId为空");
+                } else if (Lang.isEmpty(order.getServerId())) {
+                    throw new Exception("order.serverId为空");
+                } else if (Strings.isBlank(order.getOrderTitle())) {
+                    throw new Exception("order.orderTitle为空");
+                } else if (Lang.isEmpty(order.getOrderType())) {
+                    throw new Exception("order.orderType为空");
+                } else if (!JdgUtil.checkArrayExists(Dict.ORDERTYPE_ARRAY, order.getOrderType())) {
+                    throw new Exception("order.orderType订单类型错误");
+                } else if (Lang.equals(order.getOrderType(), Dict.ORDERTYPE_PRIVATE) && Lang.isEmpty(order.getProviderId())) {
+                    throw new Exception("order.providerId服务商ID为空");
+                } else if (Lang.isEmpty(order.getOrderAmount())) {
+                    throw new Exception("order.orderAmount为空");
+                } else if (Lang.isEmpty(order.getEfficiencyMargin())) {
+                    throw new Exception("order.efficiencyMargin为空");
+                } else if (Lang.isEmpty(order.getSafetyMargin())) {
+                    throw new Exception("order.safetyMargin为空");
+                } else if (Lang.isEmpty(order.getRequiredCompleteTime())) {
+                    throw new Exception("order.requiredCompleteTime为空");
+                } else if (!JdgUtil.checkArrayExists(Dict.PLTYPE_ARRAY, order.getPlType())) {
+                    throw new Exception("order.plType代练类型错误");
+                } else if (Strings.isBlank(order.getPlRequired())) {
+                    throw new Exception("order.plRequired为空");
+                } else if (Lang.isEmpty(order.getAccount())) {
+                    throw new Exception("order.gaccount为空");
+                } else if (Lang.isEmpty(order.getContact())) {
+                    throw new Exception("order.contact为空");
+                } else if (!JdgUtil.checkAccount(order.getAccount())) {
+                    throw new Exception("order.account验证失败");
+                } else if (!JdgUtil.checkContact(order.getContact())) {
+                    throw new Exception("order.contact验证失败");
                 } else {
-                    BaseResp resp = Json.fromJson(BaseResp.class, json);
-                    String orderNum = resp.getData().getString("orderNum");
-                    return orderNum;
+                    BaseReq req = new BaseReq();
+                    req.setPartnerId(partnerId);
+                    req.setTimestamp(Times.getTS());
+                    req.setVersion(Dict.JDG_API_VERSION);
+                    req.setBizData(Lang.obj2nutmap(order));
+                    req.setSign(Lang.md5(JdgUtil.buildParmas(Lang.obj2nutmap(req), new String[]{"sign"}) + key));
+                    String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER, Json.toJson(req));
+                    if (Strings.isEmpty(json)) {
+                        throw new Exception("返回值异常");
+                    } else {
+                        BaseResp resp = Json.fromJson(BaseResp.class, json);
+                        String orderNum = resp.getData().getString("orderNum");
+                        return orderNum;
+                    }
                 }
             }
+        } catch (Exception e) {
+            return null;
         }
     }
 
@@ -124,82 +105,67 @@ public class OrderUtil {
      */
     public static String createOrderV1(Integer partnerId, String key, OrderV1 order) {
 
-        if (Lang.isEmpty(partnerId)) {
-            log.error("url为空");
-            return null;
-        } else if (Strings.isBlank(key)) {
-            log.error("key为空");
-            return null;
-        } else {
-            if (Strings.isEmpty(order.getOutOrderNum())) {
-                log.error("order.outOrderNum为空");
-                return null;
-            } else if (Strings.isBlank(order.getGameName())) {
-                log.error("order.gameName为空");
-                return null;
-            } else if (Strings.isBlank(order.getChannelName())) {
-                log.error("order.channelName为空");
-                return null;
-            } else if (Strings.isBlank(order.getServerName())) {
-                log.error("order.serverName为空");
-                return null;
-            } else if (Strings.isBlank(order.getOrderTitle())) {
-                log.error("order.orderTitle为空");
-                return null;
-            } else if (Lang.isEmpty(order.getOrderType())) {
-                log.error("order.orderType为空");
-                return null;
-            } else if (!JdgUtil.checkArrayExists(Dict.ORDERTYPE_ARRAY, order.getOrderType())) {
-                log.error("order.orderType订单类型错误");
-                return null;
-            } else if (Lang.isEmpty(order.getOrderAmount())) {
-                log.error("order.orderAmount为空");
-                return null;
-            } else if (Lang.isEmpty(order.getEfficiencyMargin())) {
-                log.error("order.efficiencyMargin为空");
-                return null;
-            } else if (Lang.isEmpty(order.getSafetyMargin())) {
-                log.error("order.safetyMargin为空");
-                return null;
-            } else if (Lang.isEmpty(order.getRequiredCompleteTime())) {
-                log.error("order.requiredCompleteTime为空");
-                return null;
-            } else if (!JdgUtil.checkArrayExists(Dict.PLTYPE_ARRAY, order.getPlType())) {
-                log.error("order.plType代练类型错误");
-                return null;
-            } else if (Lang.equals(order.getOrderType(), Dict.ORDERTYPE_PRIVATE) && Lang.isEmpty(order.getProviderId())) {
-                log.error("order.providerId服务商ID为空");
-                return null;
-            } else if (Strings.isBlank(order.getPlRequired())) {
-                log.error("order.plRequired为空");
-                return null;
-            } else if (Lang.isEmpty(order.getAccount())) {
-                log.error("order.gaccount为空");
-                return null;
-            } else if (Lang.isEmpty(order.getContact())) {
-                log.error("order.contact为空");
-                return null;
-            } else if (!JdgUtil.checkAccount(order.getAccount())) {
-                return null;
-            } else if (!JdgUtil.checkContact(order.getContact())) {
-                return null;
+        try {
+            if (Lang.isEmpty(partnerId)) {
+                throw new Exception("url为空");
+            } else if (Strings.isBlank(key)) {
+                throw new Exception("key为空");
             } else {
-                BaseReq req = new BaseReq();
-                req.setPartnerId(partnerId);
-                req.setTimestamp(Times.getTS());
-                req.setVersion(Dict.JDG_API_VERSION);
-                req.setBizData(Lang.obj2nutmap(order));
-                req.setSign(Lang.md5(JdgUtil.buildParmas(Lang.obj2nutmap(req), new String[]{"sign"}) + key));
-                String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER_V1, Json.toJson(req));
-                if (Strings.isEmpty(json)) {
-                    log.error("返回值异常");
-                    return null;
+                if (Strings.isEmpty(order.getOutOrderNum())) {
+                    throw new Exception("order.outOrderNum为空");
+                } else if (Strings.isBlank(order.getGameName())) {
+                    throw new Exception("order.gameName为空");
+                } else if (Strings.isBlank(order.getChannelName())) {
+                    throw new Exception("order.channelName为空");
+                } else if (Strings.isBlank(order.getServerName())) {
+                    throw new Exception("order.serverName为空");
+                } else if (Strings.isBlank(order.getOrderTitle())) {
+                    throw new Exception("order.orderTitle为空");
+                } else if (Lang.isEmpty(order.getOrderType())) {
+                    throw new Exception("order.orderType为空");
+                } else if (!JdgUtil.checkArrayExists(Dict.ORDERTYPE_ARRAY, order.getOrderType())) {
+                    throw new Exception("order.orderType订单类型错误");
+                } else if (Lang.isEmpty(order.getOrderAmount())) {
+                    throw new Exception("order.orderAmount为空");
+                } else if (Lang.isEmpty(order.getEfficiencyMargin())) {
+                    throw new Exception("order.efficiencyMargin为空");
+                } else if (Lang.isEmpty(order.getSafetyMargin())) {
+                    throw new Exception("order.safetyMargin为空");
+                } else if (Lang.isEmpty(order.getRequiredCompleteTime())) {
+                    throw new Exception("order.requiredCompleteTime为空");
+                } else if (!JdgUtil.checkArrayExists(Dict.PLTYPE_ARRAY, order.getPlType())) {
+                    throw new Exception("order.plType代练类型错误");
+                } else if (Lang.equals(order.getOrderType(), Dict.ORDERTYPE_PRIVATE) && Lang.isEmpty(order.getProviderId())) {
+                    throw new Exception("order.providerId服务商ID为空");
+                } else if (Strings.isBlank(order.getPlRequired())) {
+                    throw new Exception("order.plRequired为空");
+                } else if (Lang.isEmpty(order.getAccount())) {
+                    throw new Exception("order.gaccount为空");
+                } else if (Lang.isEmpty(order.getContact())) {
+                    throw new Exception("order.contact为空");
+                } else if (!JdgUtil.checkAccount(order.getAccount())) {
+                    throw new Exception("order.account验证失败");
+                } else if (!JdgUtil.checkContact(order.getContact())) {
+                    throw new Exception("order.contact验证失败");
                 } else {
-                    BaseResp resp = Json.fromJson(BaseResp.class, json);
-                    String orderNum = resp.getData().getString("orderNum");
-                    return orderNum;
+                    BaseReq req = new BaseReq();
+                    req.setPartnerId(partnerId);
+                    req.setTimestamp(Times.getTS());
+                    req.setVersion(Dict.JDG_API_VERSION);
+                    req.setBizData(Lang.obj2nutmap(order));
+                    req.setSign(Lang.md5(JdgUtil.buildParmas(Lang.obj2nutmap(req), new String[]{"sign"}) + key));
+                    String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER_V1, Json.toJson(req));
+                    if (Strings.isEmpty(json)) {
+                        throw new Exception("返回值异常");
+                    } else {
+                        BaseResp resp = Json.fromJson(BaseResp.class, json);
+                        String orderNum = resp.getData().getString("orderNum");
+                        return orderNum;
+                    }
                 }
             }
+        } catch (Exception e) {
+            return null;
         }
     }
 
@@ -214,72 +180,56 @@ public class OrderUtil {
      */
     public static Boolean order(Integer partnerId, String key, ModifyOrder order) {
 
-        if (Lang.isEmpty(order.getOrderNum())) {
-            log.error("order.orderNum接单狗订单号为空");
-            return false;
-        }
+        try {
+            if (Lang.isEmpty(order.getOrderNum())) {
+                throw new Exception("order.orderNum接单狗订单号为空");
+            }
+            if (Lang.isEmpty(order.getOrderNum())) {
+                throw new Exception("order.orderNum接单狗订单号为空");
+            }
+            if (Lang.isEmpty(order.getOperationType())) {
+                throw new Exception("操作类型为空");
+            }
+            if (JdgUtil.checkArrayExists(Dict.OPERATIONTYPE_ARRAY, order.getOperationType())) {
+                throw new Exception("操作类型错误");
+            }
+            if ((Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
+                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_ABNORMAL_EXCEPTION)
+                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_ARBITRATION))
+                    && Strings.isBlank(order.getReason())) {
+                throw new Exception("备注理由为空");
+            }
+            if ((Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_COMPLETE_ACCEPTANCE)
+                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
+                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_AGREE_WITHDRAW)
+                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_FILLING_MONEY))
+                    && Strings.isBlank(order.getPayPassword())) {
+                throw new Exception("支付密码为空");
+            }
+            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_FILLING_MONEY)
+                    && Lang.isEmpty(order.getAddMoney())) {
+                throw new Exception("加款钱数为空");
+            }
+            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_STOPPAGE_TIME)
+                    && Lang.isEmpty(order.getAddTime())) {
+                throw new Exception("加时时长为空");
+            }
+            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_CORRECT_PASSWORD)
+                    && Strings.isBlank(order.getNewPassword())) {
+                throw new Exception("修正密码为空");
+            }
+            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
+                    && Lang.isEmpty(order.getPayAmount())) {
+                throw new Exception("需支付金额为空");
+            }
 
-        if (Lang.isEmpty(order.getOrderNum())) {
-            log.error("order.orderNum接单狗订单号为空");
+            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
+                    && Lang.isEmpty(order.getOffset())) {
+                throw new Exception("需赔付金额为空");
+            }
+            return null;
+        } catch (Exception e) {
             return false;
         }
-
-        if (Lang.isEmpty(order.getOperationType())) {
-            log.error("操作类型为空");
-            return false;
-        }
-
-        if (JdgUtil.checkArrayExists(Dict.OPERATIONTYPE_ARRAY, order.getOperationType())) {
-            log.error("操作类型错误");
-            return false;
-        }
-
-        if ((Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
-                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_ABNORMAL_EXCEPTION)
-                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_ARBITRATION))
-                && Strings.isBlank(order.getReason())) {
-            log.error("备注理由为空");
-            return false;
-        }
-
-        if ((Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_COMPLETE_ACCEPTANCE)
-                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
-                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_AGREE_WITHDRAW)
-                || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_FILLING_MONEY))
-                && Strings.isBlank(order.getPayPassword())) {
-            log.error("支付密码为空");
-            return false;
-        }
-
-        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_FILLING_MONEY)
-                && Lang.isEmpty(order.getAddMoney())) {
-            log.error("加款钱数为空");
-            return false;
-        }
-
-        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_STOPPAGE_TIME)
-                && Lang.isEmpty(order.getAddTime())) {
-            log.error("加时时长为空");
-            return false;
-        }
-
-        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_CORRECT_PASSWORD)
-                && Strings.isBlank(order.getNewPassword())) {
-            log.error("修正密码为空");
-            return false;
-        }
-
-        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
-                && Lang.isEmpty(order.getPayAmount())) {
-            log.error("需支付金额为空");
-            return false;
-        }
-
-        if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
-                && Lang.isEmpty(order.getOffset())) {
-            log.error("需赔付金额为空");
-            return false;
-        }
-        return null;
     }
 }
