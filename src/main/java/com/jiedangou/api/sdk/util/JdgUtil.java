@@ -221,20 +221,20 @@ public class JdgUtil {
     }
 
     /**
-     * 构建签名
-     *
-     * @param obj
-     * @param key
+     * 生成签名
+     * @param map 加密对象
+     * @param key 密钥
      * @return
      */
-    public static String buildSign(NutMap obj, String key) {
+    public static String getSign(NutMap map, String key) {
         try {
-            if (Lang.isEmpty(obj)) {
-                throw new Exception("obj加密对象为空");
+
+            if (Lang.isEmpty(map)) {
+                throw new Exception("map为空");
             } else if (Strings.isEmpty(key)) {
-                throw new Exception("key密钥为空");
+                throw new Exception("key为空");
             } else {
-                return Lang.md5(buildParmas(obj, new String[]{"sign"}) + key);
+                return Lang.md5(JdgUtil.buildParmas(map, new String[]{"sign"}) + key);
             }
         } catch (Exception e) {
             return null;
