@@ -1,4 +1,4 @@
-package com.jiedangou.api.sdk.bean.param.biz;
+package com.jiedangou.api.sdk.bean.param.req.biz;
 
 import com.jiedangou.api.sdk.bean.param.pro.Account;
 import com.jiedangou.api.sdk.bean.param.pro.Contact;
@@ -10,7 +10,7 @@ import org.nutz.lang.Lang;
  *
  * @author Jianghao(howechiang@gmail.com)
  */
-public class Order {
+public class CreateOrderV1 {
 
     /**
      * 外部订单号
@@ -26,45 +26,45 @@ public class Order {
     }
 
     /**
-     * 游戏ID
+     * 游戏名称
      * 请与接单狗平台数据同步
      */
-    private Integer gameId;
+    private String gameName;
 
-    public Integer getGameId() {
-        return gameId;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setGameId(Integer gameId) {
-        this.gameId = gameId;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     /**
-     * 渠道ID
+     * 渠道名称
      * 请与接单狗平台数据同步
      */
-    private Integer channelId;
+    private String channelName;
 
-    public Integer getChannelId() {
-        return channelId;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setChannelId(Integer channelId) {
-        this.channelId = channelId;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
     /**
-     * 服务器ID
+     * 服务器名称
      * 请与接单狗平台数据同步
      */
-    private Integer serverId;
+    private String serverName;
 
-    public Integer getServerId() {
-        return serverId;
+    public String getServerName() {
+        return serverName;
     }
 
-    public void setServerId(Integer serverId) {
-        this.serverId = serverId;
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 
     /**
