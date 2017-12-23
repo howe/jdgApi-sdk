@@ -4,6 +4,7 @@ import com.jiedangou.api.sdk.bean.dict.Dict;
 import org.nutz.json.JsonField;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单留言
@@ -11,7 +12,7 @@ import java.util.Date;
  *
  * @howechiang
  */
-public class OrderMessage {
+public class OMessage {
 
     /**
      * 留言时间
@@ -38,6 +39,19 @@ public class OrderMessage {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    /**
+     * 图片地址列表
+     */
+    private List<String> pics;
+
+    public List<String> getPics() {
+        return pics;
+    }
+
+    public void setPics(List<String> pics) {
+        this.pics = pics;
     }
 
     /**
@@ -68,5 +82,16 @@ public class OrderMessage {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public OMessage() {
+    }
+
+    public OMessage(String comments) {
+        this.comments = comments;
+    }
+
+    public OMessage(List<String> pics) {
+        this.pics = pics;
     }
 }
