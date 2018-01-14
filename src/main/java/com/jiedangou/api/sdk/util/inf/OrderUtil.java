@@ -1,17 +1,23 @@
 package com.jiedangou.api.sdk.util.inf;
 
 import com.jiedangou.api.sdk.bean.dict.Dict;
-import com.jiedangou.api.sdk.bean.param.biz.ModifyOrder;
+import com.jiedangou.api.sdk.bean.param.biz.PaOrder;
 import com.jiedangou.api.sdk.bean.param.req.biz.CreateOrder;
 import com.jiedangou.api.sdk.bean.param.req.biz.CreateOrderV1;
 import com.jiedangou.api.sdk.bean.param.req.BaseReq;
+import com.jiedangou.api.sdk.bean.param.req.biz.FetchOrder;
+import com.jiedangou.api.sdk.bean.param.req.biz.QueryOrderList;
 import com.jiedangou.api.sdk.bean.param.resp.BaseResp;
 import com.jiedangou.api.sdk.util.HttpUtil;
 import com.jiedangou.api.sdk.util.JdgUtil;
+import org.nutz.dao.QueryResult;
+import org.nutz.dao.pager.Pager;
 import org.nutz.json.Json;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.nutz.lang.Times;
+
+import java.util.List;
 
 /**
  * 订单
@@ -169,67 +175,78 @@ public class OrderUtil {
         }
     }
 
-
     /**
-     * 4.5 修改订单
+     * 4.20 查询订单信息
      *
      * @param partnerId 合作商ID
      * @param key       密钥key
-     * @param order     订单信息
+     * @param biz       业务数据
      * @return
      */
-    public static Boolean order(Integer partnerId, String key, ModifyOrder order) {
+    public static PaOrder order(Integer partnerId, String key, FetchOrder biz) {
 
         try {
-            if (Lang.isEmpty(order.getOrderNum())) {
-                throw new Exception("order.orderNum接单狗订单号为空");
+            if (Lang.isEmpty(partnerId)) {
+                throw new Exception("合作商ID为空");
             }
-            if (Lang.isEmpty(order.getOrderNum())) {
-                throw new Exception("order.orderNum接单狗订单号为空");
+            if (Strings.isBlank(key)) {
+                throw new Exception("密钥为空");
             }
-            if (Lang.isEmpty(order.getOperationType())) {
-                throw new Exception("操作类型为空");
+            if (Strings.isBlank(biz.getOrderNum())) {
+                throw new Exception("接单狗订单号为空");
             }
-            if (JdgUtil.checkArrayExists(Dict.OPERATIONTYPE_ARRAY, order.getOperationType())) {
-                throw new Exception("操作类型错误");
+            BaseReq req = new BaseReq();
+            req.setPartnerId(partnerId);
+            req.setTimestamp(Times.getTS());
+            req.setVersion(Dict.JDG_API_VERSION);
+            req.setBizData(Lang.obj2nutmap(biz));
+            req.setSign(JdgUtil.getSign(Lang.obj2nutmap(req), key));
+            String json = HttpUtil.post(Dict.JDG_DEV_API_HOST + Dict.JDG_API_ACTION_ORDER_FETCHORDER, Json.toJson(req));
+            if (Strings.isEmpty(json)) {
+                throw new Exception("返回值异常");
+            } else {
+                BaseResp resp = Json.fromJson(BaseResp.class, json);
+                PaOrder order = resp.getData().getAs("order", PaOrder.class);
+                return order;
             }
-            if ((Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
-                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_ABNORMAL_EXCEPTION)
-                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_ARBITRATION))
-                    && Strings.isBlank(order.getReason())) {
-                throw new Exception("备注理由为空");
-            }
-            if ((Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_COMPLETE_ACCEPTANCE)
-                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
-                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_AGREE_WITHDRAW)
-                    || Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_FILLING_MONEY))
-                    && Strings.isBlank(order.getPayPassword())) {
-                throw new Exception("支付密码为空");
-            }
-            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_FILLING_MONEY)
-                    && Lang.isEmpty(order.getAddMoney())) {
-                throw new Exception("加款钱数为空");
-            }
-            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_STOPPAGE_TIME)
-                    && Lang.isEmpty(order.getAddTime())) {
-                throw new Exception("加时时长为空");
-            }
-            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_CORRECT_PASSWORD)
-                    && Strings.isBlank(order.getNewPassword())) {
-                throw new Exception("修正密码为空");
-            }
-            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
-                    && Lang.isEmpty(order.getPayAmount())) {
-                throw new Exception("需支付金额为空");
-            }
-
-            if (Strings.equalsIgnoreCase(order.getOperationType(), Dict.OPERATIONTYPE_OP_APPLY_CANCELLATION)
-                    && Lang.isEmpty(order.getOffset())) {
-                throw new Exception("需赔付金额为空");
-            }
-            return null;
         } catch (Exception e) {
-            return false;
+            return null;
+        }
+    }
+
+    /**
+     * 4.21 查询订单列表
+     *
+     * @param partnerId 合作商ID
+     * @param key       密钥key
+     * @param biz       业务数据
+     * @return
+     */
+    public static QueryResult queryOrderList(Integer partnerId, String key, QueryOrderList biz) {
+        try {
+            if (Lang.isEmpty(partnerId)) {
+                throw new Exception("合作商ID为空");
+            }
+            if (Strings.isBlank(key)) {
+                throw new Exception("密钥为空");
+            }
+            BaseReq req = new BaseReq();
+            req.setPartnerId(partnerId);
+            req.setTimestamp(Times.getTS());
+            req.setVersion(Dict.JDG_API_VERSION);
+            req.setBizData(Lang.obj2nutmap(biz));
+            req.setSign(JdgUtil.getSign(Lang.obj2nutmap(req), key));
+            String json = HttpUtil.post(Dict.JDG_DEV_API_HOST + Dict.JDG_API_ACTION_ORDER_QUERYORDERLIST, Json.toJson(req));
+            if (Strings.isEmpty(json)) {
+                throw new Exception("返回值异常");
+            } else {
+                BaseResp resp = Json.fromJson(BaseResp.class, json);
+                List<PaOrder> orders = resp.getData().getAsList("orders", PaOrder.class);
+                Pager pager = resp.getData().getAs("pager", Pager.class);
+                return new QueryResult(orders, pager);
+            }
+        } catch (Exception e) {
+            return null;
         }
     }
 }

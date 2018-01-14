@@ -15,7 +15,8 @@ public class Dict {
     public static String JDG_API_ACTION_GAME_QUERYGAMEDETAIL = "/game/queryGame.htm";
     public static String JDG_API_ACTION_ORDER_CREATEORDER = "/order/createOrder.htm";
     public static String JDG_API_ACTION_ORDER_CREATEORDER_V1 = "/order/createOrderV1.htm";
-    public static String JDG_API_ACTION_ORDER_MODIFYORDER = "/order/modifyOrder.htm";
+    public static String JDG_API_ACTION_ORDER_FETCHORDER = "/order/fetchOrder.htm";
+    public static String JDG_API_ACTION_ORDER_QUERYORDERLIST = "/order/queryOrderList.htm";
 
     /**
      * 订单类型
