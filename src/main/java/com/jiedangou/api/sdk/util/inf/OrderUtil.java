@@ -183,7 +183,7 @@ public class OrderUtil {
      * @param biz       业务数据
      * @return
      */
-    public static PaOrder order(Integer partnerId, String key, FetchOrder biz) {
+    public static PaOrder fetchOrder(Integer partnerId, String key, FetchOrder biz) {
 
         try {
             if (Lang.isEmpty(partnerId)) {
