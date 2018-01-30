@@ -1,4 +1,4 @@
-package com.jiedangou.api.sdk.util.inf;
+package com.jiedangou.api.sdk.util.api;
 
 import com.jiedangou.api.sdk.bean.dict.Dict;
 import com.jiedangou.api.sdk.bean.param.biz.PaOrder;
@@ -86,7 +86,7 @@ public class OrderUtil {
                     req.setVersion(Dict.JDG_API_VERSION);
                     req.setBizData(Lang.obj2nutmap(biz));
                     req.setSign(JdgUtil.getSign(Lang.obj2nutmap(req), key));
-                    String json = HttpUtil.post(Dict.JDG_DEV_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER, Json.toJson(req));
+                    String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER, Json.toJson(req));
                     if (Strings.isEmpty(json)) {
                         throw new Exception("返回值异常");
                     } else {
@@ -97,6 +97,7 @@ public class OrderUtil {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -160,7 +161,7 @@ public class OrderUtil {
                     req.setVersion(Dict.JDG_API_VERSION);
                     req.setBizData(Lang.obj2nutmap(biz));
                     req.setSign(JdgUtil.getSign(Lang.obj2nutmap(req), key));
-                    String json = HttpUtil.post(Dict.JDG_DEV_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER_V1, Json.toJson(req));
+                    String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_CREATEORDER_V1, Json.toJson(req));
                     if (Strings.isEmpty(json)) {
                         throw new Exception("返回值异常");
                     } else {
@@ -171,6 +172,7 @@ public class OrderUtil {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -201,7 +203,7 @@ public class OrderUtil {
             req.setVersion(Dict.JDG_API_VERSION);
             req.setBizData(Lang.obj2nutmap(biz));
             req.setSign(JdgUtil.getSign(Lang.obj2nutmap(req), key));
-            String json = HttpUtil.post(Dict.JDG_DEV_API_HOST + Dict.JDG_API_ACTION_ORDER_FETCHORDER, Json.toJson(req));
+            String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_FETCHORDER, Json.toJson(req));
             if (Strings.isEmpty(json)) {
                 throw new Exception("返回值异常");
             } else {
@@ -210,6 +212,7 @@ public class OrderUtil {
                 return order;
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -236,7 +239,7 @@ public class OrderUtil {
             req.setVersion(Dict.JDG_API_VERSION);
             req.setBizData(Lang.obj2nutmap(biz));
             req.setSign(JdgUtil.getSign(Lang.obj2nutmap(req), key));
-            String json = HttpUtil.post(Dict.JDG_DEV_API_HOST + Dict.JDG_API_ACTION_ORDER_QUERYORDERLIST, Json.toJson(req));
+            String json = HttpUtil.post(Dict.JDG_API_HOST + Dict.JDG_API_ACTION_ORDER_QUERYORDERLIST, Json.toJson(req));
             if (Strings.isEmpty(json)) {
                 throw new Exception("返回值异常");
             } else {
@@ -246,6 +249,7 @@ public class OrderUtil {
                 return new QueryResult(orders, pager);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
