@@ -8,6 +8,7 @@ package com.jiedangou.api.sdk.bean.dict;
 public class Dict {
 
     public static final String DATE_FORMART_FULL = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_CHINA_TIMEZONE = "GMT+8";
     public static String JDG_API_HOST = "https://api.jiedangou.com";
     public static String JDG_DEV_API_HOST = "https://api.dev.jiedangou.com";
     public static String JDG_API_VERSION = "1.0";
