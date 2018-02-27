@@ -57,6 +57,19 @@ public class PaOrder {
     }
 
     /**
+     * 服务商订单号
+     */
+    private String pOrderNum;
+
+    public String getpOrderNum() {
+        return pOrderNum;
+    }
+
+    public void setpOrderNum(String pOrderNum) {
+        this.pOrderNum = pOrderNum;
+    }
+
+    /**
      * 创建时间
      */
     @JsonField(dataFormat = Dict.DATE_FORMART_FULL, timeZone = Dict.DATE_CHINA_TIMEZONE)
@@ -475,4 +488,31 @@ public class PaOrder {
     public void setLock(Boolean lock) {
         isLock = lock;
     }
+
+    /**
+     * 订单来源
+     */
+    private String orderSource;
+
+    public String getOrderSource() {
+        return orderSource;
+    }
+
+    public void setOrderSource(String orderSource) {
+        this.orderSource = orderSource;
+    }
+
+    /**
+     * 订单处理
+     */
+    private String orderReceive;
+
+    public String getOrderReceive() {
+        return orderReceive;
+    }
+
+    public void setOrderReceive(String orderReceive) {
+        this.orderReceive = orderReceive;
+    }
+
 }
