@@ -101,7 +101,6 @@ public class PaOrder {
      * 13 申述中（服务商申述）
      * 14 已完成
      * 88 已结算
-     * 99 已完结
      */
     private Integer orderStatus;
 
@@ -474,6 +473,19 @@ public class PaOrder {
 
     public void setFinishedTime(Date finishedTime) {
         this.finishedTime = finishedTime;
+    }
+
+    /**
+     * 是否完结
+     */
+    private Boolean isFinished;
+
+    public Boolean getFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(Boolean finished) {
+        isFinished = finished;
     }
 
     /**
