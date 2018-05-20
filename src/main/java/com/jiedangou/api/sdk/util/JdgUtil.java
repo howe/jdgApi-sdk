@@ -248,7 +248,7 @@ public class JdgUtil {
      * @param val
      * @return
      */
-    public static Boolean checkArrayExists(Integer[] array, Integer val) {
+    public static Boolean checkArrayExists(Integer[] array, int val) {
 
         try {
             if (Lang.isEmpty(array)) {

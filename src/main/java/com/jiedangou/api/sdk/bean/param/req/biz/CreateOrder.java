@@ -111,46 +111,43 @@ public class CreateOrder {
 
     /**
      * 订单金额
-     * 保留2位小数
-     * 单位 元
+     * 单位 分
      */
-    private Double orderAmount;
+    private int orderAmount;
 
-    public Double getOrderAmount() {
+    public int getOrderAmount() {
         return orderAmount;
     }
 
-    public void setOrderAmount(Double orderAmount) {
+    public void setOrderAmount(int orderAmount) {
         this.orderAmount = orderAmount;
     }
 
     /**
      * 安全保证金
-     * 保留2位小数
-     * 单位 元
+     * 单位 分
      */
-    private Double safetyMargin;
+    private int safetyMargin;
 
-    public Double getSafetyMargin() {
+    public int getSafetyMargin() {
         return safetyMargin;
     }
 
-    public void setSafetyMargin(Double safetyMargin) {
+    public void setSafetyMargin(int safetyMargin) {
         this.safetyMargin = safetyMargin;
     }
 
     /**
      * 效率保证金
-     * 保留2位小数
-     * 单位 元
+     * 单位 分
      */
-    private Double efficiencyMargin;
+    private int efficiencyMargin;
 
-    public Double getEfficiencyMargin() {
+    public int getEfficiencyMargin() {
         return efficiencyMargin;
     }
 
-    public void setEfficiencyMargin(Double efficiencyMargin) {
+    public void setEfficiencyMargin(int efficiencyMargin) {
         this.efficiencyMargin = efficiencyMargin;
     }
 
@@ -158,13 +155,13 @@ public class CreateOrder {
      * 订单要求完成时间
      * 单位 小时
      */
-    private Integer requiredCompleteTime;
+    private int requiredCompleteTime;
 
-    public Integer getRequiredCompleteTime() {
+    public int getRequiredCompleteTime() {
         return requiredCompleteTime;
     }
 
-    public void setRequiredCompleteTime(Integer requiredCompleteTime) {
+    public void setRequiredCompleteTime(int requiredCompleteTime) {
         this.requiredCompleteTime = requiredCompleteTime;
     }
 
@@ -179,9 +176,9 @@ public class CreateOrder {
      * 7 级别
      * 0 其他
      */
-    private Integer plType;
+    private int plType;
 
-    public Integer getPlType() {
+    public int getPlType() {
         return plType;
     }
 

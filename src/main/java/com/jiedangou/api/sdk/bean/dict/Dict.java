@@ -25,11 +25,11 @@ public class Dict {
      * 2 优质
      * 3 私有
      */
-    public static final Integer ORDERTYPE_ARRAY[] = {1, 2, 3};
+    public static final int ORDERTYPE_ARRAY[] = {1, 2, 3};
 
-    public static final Integer ORDERTYPE_ORDINARY = 1;
-    public static final Integer ORDERTYPE_GRADE = 2;
-    public static final Integer ORDERTYPE_PRIVATE = 3;
+    public static final int ORDERTYPE_ORDINARY = 1;
+    public static final int ORDERTYPE_GRADE = 2;
+    public static final int ORDERTYPE_PRIVATE = 3;
 
     /**
      * 代练(Power Leveling)类型
@@ -42,7 +42,7 @@ public class Dict {
      * 7 级别
      * 0 其他
      */
-    public static final Integer PLTYPE_ARRAY[] = {0, 1, 2, 3, 4, 5, 6, 7};
+    public static final int PLTYPE_ARRAY[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
     /**
      * 订单状态
@@ -63,7 +63,7 @@ public class Dict {
      * 14 已完成
      * 88 已结算
      */
-    public static final Integer ORDERSTATUS_ARRAY[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 88};
+    public static final int ORDERSTATUS_ARRAY[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 88};
 
     public static final String OPERATIONTYPE_ARRAY[] = {"OP_LOCK", "OP_UNLOCK",
             "OP_APPLY_ACCEPTANCE", "OP_CANCEL_ACCEPTANCE", "OP_COMPLETE_ACCEPTANCE",
@@ -135,81 +135,81 @@ public class Dict {
     /**
      * 已取消
      */
-    public static final Integer ORDERSTATUS_CANCELLED = 0;
+    public static final int ORDERSTATUS_CANCELLED = 0;
 
     /**
      * 已下单（未接手）
      */
-    public static final Integer ORDERSTATUS_ALREADY_ORDERED = 1;
+    public static final int ORDERSTATUS_ALREADY_ORDERED = 1;
 
     /**
      * 已接手（未处理）
      */
-    public static final Integer ORDERSTATUS_ACCEPTED = 2;
+    public static final int ORDERSTATUS_ACCEPTED = 2;
 
     /**
      * 处理中（代练中）
      */
-    public static final Integer ORDERSTATUS_PROCESSING = 3;
+    public static final int ORDERSTATUS_PROCESSING = 3;
 
     /**
      * 待验收
      */
-    public static final Integer ORDERSTATUS_TO_BE_ACCEPTED = 4;
+    public static final int ORDERSTATUS_TO_BE_ACCEPTED = 4;
 
     /**
      * 撤销中
      */
-    public static final Integer ORDERSTATUS_CANCELLATION = 5;
+    public static final int ORDERSTATUS_CANCELLATION = 5;
 
     /**
      * 仲裁中
      */
-    public static final Integer ORDERSTATUS_ARBITRATION = 6;
+    public static final int ORDERSTATUS_ARBITRATION = 6;
 
     /**
      * 异常
      */
-    public static final Integer ORDERSTATUS_EXCEPTION = 7;
+    public static final int ORDERSTATUS_EXCEPTION = 7;
 
     /**
      * 锁定
      */
-    public static final Integer ORDERSTATUS_LOCKED = 8;
+    public static final int ORDERSTATUS_LOCKED = 8;
 
     /**
      * 已下架
      */
-    public static final Integer ORDERSTATUS_OFF_SHELF = 9;
+    public static final int ORDERSTATUS_OFF_SHELF = 9;
 
     /**
      * 已撤销
      */
-    public static final Integer ORDERSTATUS_REVOKED = 10;
+    public static final int ORDERSTATUS_REVOKED = 10;
 
     /**
      * 已仲裁
      */
-    public static final Integer ORDERSTATUS_ARBITRATED = 11;
+    public static final int ORDERSTATUS_ARBITRATED = 11;
 
     /**
      * 强制仲裁
      */
-    public static final Integer ORDERSTATUS_MANDATORY_ARBITRATION = 12;
+    public static final int ORDERSTATUS_MANDATORY_ARBITRATION = 12;
 
 
     /**
      * 申述中
      */
-    public static final Integer ORDERSTATUS_REPRESENTATION = 13;
+    public static final int ORDERSTATUS_REPRESENTATION = 13;
 
     /**
      * 已完成
      */
-    public static final Integer ORDERSTATUS_COMPLETED = 14;
+    public static final int ORDERSTATUS_COMPLETED = 14;
 
     /**
      * 已结算
      */
-    public static final Integer ORDERSTATUS_SETTLED = 88;
+    public static final int ORDERSTATUS_SETTLED = 88;
 }
