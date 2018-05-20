@@ -25,7 +25,7 @@ public class Dict {
      * 2 优质
      * 3 私有
      */
-    public static final int ORDERTYPE_ARRAY[] = {1, 2, 3};
+    public static final Integer ORDERTYPE_ARRAY[] = {1, 2, 3};
 
     public static final int ORDERTYPE_ORDINARY = 1;
     public static final int ORDERTYPE_GRADE = 2;
@@ -42,7 +42,7 @@ public class Dict {
      * 7 级别
      * 0 其他
      */
-    public static final int PLTYPE_ARRAY[] = {0, 1, 2, 3, 4, 5, 6, 7};
+    public static final Integer PLTYPE_ARRAY[] = {0, 1, 2, 3, 4, 5, 6, 7};
 
     /**
      * 订单状态
