@@ -15,14 +15,14 @@ public class CreateOrder {
     /**
      * 外部订单号
      */
-    private String outOrderNum;
+    private String outOrderNo;
 
-    public String getOutOrderNum() {
-        return outOrderNum;
+    public String getOutOrderNo() {
+        return outOrderNo;
     }
 
-    public void setOutOrderNum(String outOrderNum) {
-        this.outOrderNum = outOrderNum;
+    public void setOutOrderNo(String outOrderNo) {
+        this.outOrderNo = outOrderNo;
     }
 
     /**

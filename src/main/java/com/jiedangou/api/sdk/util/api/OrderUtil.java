@@ -43,8 +43,8 @@ public class OrderUtil {
             } else if (Strings.isBlank(key)) {
                 throw new Exception("key为空");
             } else {
-                if (Strings.isEmpty(biz.getOutOrderNum())) {
-                    throw new Exception("order.outOrderNum为空");
+                if (Strings.isEmpty(biz.getOutOrderNo())) {
+                    throw new Exception("order.outOrderNo为空");
                 } else if (Lang.isEmpty(biz.getGameId())) {
                     throw new Exception("order.gameId为空");
                 } else if (Lang.isEmpty(biz.getChannelId())) {
@@ -91,8 +91,8 @@ public class OrderUtil {
                         throw new Exception("返回值异常");
                     } else {
                         BaseResp resp = Json.fromJson(BaseResp.class, json);
-                        String orderNum = resp.getData().getString("orderNum");
-                        return orderNum;
+                        String orderNo = resp.getData().getString("orderNo");
+                        return orderNo;
                     }
                 }
             }
@@ -118,8 +118,8 @@ public class OrderUtil {
             } else if (Strings.isBlank(key)) {
                 throw new Exception("key为空");
             } else {
-                if (Strings.isEmpty(biz.getOutOrderNum())) {
-                    throw new Exception("order.outOrderNum为空");
+                if (Strings.isEmpty(biz.getOutOrderNo())) {
+                    throw new Exception("order.outOrderNo为空");
                 } else if (Strings.isBlank(biz.getGameName())) {
                     throw new Exception("order.gameName为空");
                 } else if (Strings.isBlank(biz.getChannelName())) {
@@ -166,8 +166,8 @@ public class OrderUtil {
                         throw new Exception("返回值异常");
                     } else {
                         BaseResp resp = Json.fromJson(BaseResp.class, json);
-                        String orderNum = resp.getData().getString("orderNum");
-                        return orderNum;
+                        String orderNo = resp.getData().getString("orderNo");
+                        return orderNo;
                     }
                 }
             }
@@ -194,7 +194,7 @@ public class OrderUtil {
             if (Strings.isBlank(key)) {
                 throw new Exception("密钥为空");
             }
-            if (Strings.isBlank(biz.getOrderNum())) {
+            if (Strings.isBlank(biz.getOrderNo())) {
                 throw new Exception("接单狗订单号为空");
             }
             BaseReq req = new BaseReq();
